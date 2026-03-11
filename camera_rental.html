@@ -1,0 +1,344 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LensRoyale - Premium Camera Rentals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">📸</span>
+                <span>LENSROYALE</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#products">Cameras</a></li>
+                <li><a href="#accessories">Accessories</a></li>
+                <li><a href="#features">Why Us</a></li>
+            </ul>
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Search cameras, lenses..." id="searchInput">
+            </div>
+            <button class="cart-btn" id="cartBtn" onclick="openCart()">
+                🛒 <span class="cart-count" id="cartCount">0</span>
+            </button>
+            <div class="nav-right-mobile">
+                <button class="mobile-cart-btn" id="mobileCartBtn" onclick="openCart()">
+                    🛒
+                    <span class="mobile-cart-count" id="mobileCartCount">0</span>
+                </button>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMobile()">Home</a>
+        <a href="#categories" onclick="closeMobile()">Categories</a>
+        <a href="#products" onclick="closeMobile()">Cameras</a>
+        <a href="#accessories" onclick="closeMobile()">Accessories</a>
+        <a href="#features" onclick="closeMobile()">Why Us</a>
+        <div class="mobile-search">
+            <span>🔍</span>
+            <input type="text" placeholder="Search cameras, lenses...">
+        </div>
+    </div>
+
+    <!-- Cart Notification -->
+    <div class="cart-notification" id="cartNotification">
+        <span class="check">✅</span>
+        <div class="text"><strong id="notifItem">Item</strong> added to cart!</div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2>🛒 Your Cart <span class="item-count" id="cartItemCount">0 items</span></h2>
+            <button class="cart-close" onclick="closeCart()">✕</button>
+        </div>
+        <div class="cart-items" id="cartItemsList">
+            <!-- Cart items rendered here -->
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div id="cartSummary"></div>
+            <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()" disabled>
+                🔒 Proceed to Checkout
+            </button>
+            <button class="clear-cart-btn" id="clearCartBtn" onclick="clearCart()">
+                🗑️ Clear Entire Cart
+            </button>
+        </div>
+    </aside>
+
+    <!-- Checkout Success Modal -->
+    <div class="checkout-modal-overlay" id="checkoutModal">
+        <div class="checkout-modal">
+            <span class="checkout-success-icon">🎉</span>
+            <h2>Order <span class="highlight">Confirmed!</span></h2>
+            <p>Your premium camera gear is being prepared for dispatch. You'll receive a confirmation email shortly.</p>
+            <div class="order-id">
+                <label>Order ID</label>
+                <span id="orderId">LR-000000</span>
+            </div>
+            <button class="checkout-modal-close" onclick="closeCheckoutModal()">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">✨ Premium Camera Rentals</span>
+                <h1>Capture Every <span class="highlight">Moment</span> With Royal Precision</h1>
+                <p>Rent professional-grade cameras and accessories from India's most trusted camera rental service. From
+                    DSLRs to cinema rigs — we've got your vision covered.</p>
+                <div class="hero-buttons">
+                    <a href="#products" class="btn-primary">Explore Cameras 📷</a>
+                    <a href="#categories" class="btn-secondary">Browse Categories</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Cameras</p>
+                    </div>
+                    <div class="stat">
+                        <h3>10K+</h3>
+                        <p>Happy Clients</p>
+                    </div>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>Support</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-camera-display">
+                    <div class="camera-ring"></div>
+                    <div class="camera-ring"></div>
+                    <div class="camera-ring"></div>
+                    <img src="/images/hero-camera.png" class="hero-img" alt="Premium Camera">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Categories -->
+    <section id="categories">
+        <div class="section-header scroll-animate">
+            <span class="section-tag">Browse Collection</span>
+            <h2>Camera <span class="highlight">Categories</span></h2>
+            <div class="divider"></div>
+            <p>Find the perfect camera for every occasion — from professional shoots to adventure filmmaking.</p>
+        </div>
+        <div class="categories-grid">
+            <div class="category-card scroll-animate" style="transition-delay:0.1s"><img src="/images/dslr 1.jpg"
+                    class="category-icon" alt="DSLR">
+                <h3>DSLR</h3>
+                <p>45+ Models</p>
+            </div>
+            <div class="category-card scroll-animate" style="transition-delay:0.2s"><img src="/images/mirrorless.jpg"
+                    class="category-icon" alt="Mirrorless">
+                <h3>Mirrorless</h3>
+                <p>38+ Models</p>
+            </div>
+            <div class="category-card scroll-animate" style="transition-delay:0.3s"><img src="/images/cinema.jpg"
+                    class="category-icon" alt="Cinema">
+                <h3>Cinema</h3>
+                <p>22+ Models</p>
+            </div>
+            <div class="category-card scroll-animate" style="transition-delay:0.4s"><img src="/images/action.jpg"
+                    class="category-icon" alt="Action Cam">
+                <h3>Action Cam</h3>
+                <p>15+ Models</p>
+            </div>
+            <div class="category-card scroll-animate" style="transition-delay:0.5s"><img src="/images/mobile rigs.jpg"
+                    class="category-icon" alt="Mobile Rigs">
+                <h3>Mobile Rigs</h3>
+                <p>20+ Setups</p>
+            </div>
+            <div class="category-card scroll-animate" style="transition-delay:0.6s"><img src="/images/drone.jpg"
+                    class="category-icon" alt="Drones">
+                <h3>Drones</h3>
+                <p>12+ Models</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <div class="products-section" id="products">
+        <div class="inner">
+            <div class="section-header scroll-animate">
+                <span class="section-tag">Featured Cameras</span>
+                <h2>Rent <span class="highlight">Premium</span> Cameras</h2>
+                <div class="divider"></div>
+                <p>Handpicked selection of the finest cameras available for rent. Professional quality, affordable
+                    prices.</p>
+            </div>
+            <div class="filter-tabs scroll-animate">
+                <button class="filter-tab active" data-filter="all">All</button>
+                <button class="filter-tab" data-filter="dslr">DSLR</button>
+                <button class="filter-tab" data-filter="mirrorless">Mirrorless</button>
+                <button class="filter-tab" data-filter="video">Video</button>
+                <button class="filter-tab" data-filter="action">Action</button>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+    </div>
+
+    <!-- Accessories -->
+    <section id="accessories">
+        <div class="section-header scroll-animate">
+            <span class="section-tag">Complete Your Kit</span>
+            <h2>Camera <span class="highlight">Accessories</span></h2>
+            <div class="divider"></div>
+            <p>Enhance your shooting experience with our premium range of camera accessories and gear.</p>
+        </div>
+        <div class="accessories-grid" id="accessoriesGrid"></div>
+    </section>
+
+    <!-- Features -->
+    <div class="features-section" id="features">
+        <div class="section-header scroll-animate">
+            <span class="section-tag">Why Choose Us</span>
+            <h2>The <span class="highlight">LensRoyale</span> Advantage</h2>
+            <div class="divider"></div>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card scroll-animate" style="transition-delay:0.1s"><span class="feature-icon">🏆</span>
+                <h3>Premium Quality</h3>
+                <p>Every camera is meticulously maintained and checked before rental. Only the finest gear in our
+                    inventory.</p>
+            </div>
+            <div class="feature-card scroll-animate" style="transition-delay:0.2s"><span class="feature-icon">💰</span>
+                <h3>Best Prices</h3>
+                <p>Competitive rental rates with flexible daily, weekly, and monthly plans to suit every budget.</p>
+            </div>
+            <div class="feature-card scroll-animate" style="transition-delay:0.3s"><span class="feature-icon">🚚</span>
+                <h3>Free Delivery</h3>
+                <p>Get your gear delivered to your doorstep for free. Same-day delivery available in select cities.</p>
+            </div>
+            <div class="feature-card scroll-animate" style="transition-delay:0.4s"><span class="feature-icon">🛡️</span>
+                <h3>Damage Protection</h3>
+                <p>Comprehensive insurance on all rentals. Shoot worry-free with our protection plans.</p>
+            </div>
+            <div class="feature-card scroll-animate" style="transition-delay:0.5s"><span class="feature-icon">🎓</span>
+                <h3>Expert Support</h3>
+                <p>Our team of professional photographers can help you choose the right gear for your project.</p>
+            </div>
+            <div class="feature-card scroll-animate" style="transition-delay:0.6s"><span class="feature-icon">🔄</span>
+                <h3>Easy Returns</h3>
+                <p>Hassle-free return process with pickup from your location. Extend rentals with just one click.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <div class="cta-inner scroll-animate">
+            <h2>Ready to Start <span class="highlight">Shooting</span>?</h2>
+            <p>Join 10,000+ photographers and filmmakers who trust LensRoyale for their camera rental needs. Get 20% off
+                your first rental!</p>
+            <a href="#products" class="btn-primary">Rent Now — Get 20% Off 🎉</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo"><span class="logo-icon">📸</span><span>LENSROYALE</span></a>
+                <p>India's most trusted premium camera rental platform. Professional gear, affordable prices, royal
+                    service.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" title="WhatsApp">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path
+                                d="M12.031 0C5.395 0 .01 5.385.01 12.023c0 2.133.555 4.218 1.611 6.052L0 24l6.096-1.595c1.782 1.006 3.791 1.537 5.922 1.537h.007c6.634 0 12.022-5.384 12.022-12.021C24.047 5.343 18.667 0 12.031 0zm0 22.023h-.005c-1.815 0-3.593-.487-5.15-1.411l-.37-.219-3.82.999 1.021-3.722-.24-.383A10.024 10.024 0 0 1 1.961 12.02C1.961 6.467 6.48 1.954 12.037 1.954c5.556 0 10.076 4.516 10.076 10.068 0 5.553-4.522 10.001-10.082 10.001zM17.55 14.5c-.302-.15-1.786-.881-2.063-.981-.277-.101-.478-.15-.68.151-.202.302-.782.981-.958 1.182-.177.202-.355.227-.657.076-1.637-.811-2.822-1.558-3.921-3.411-.237-.4-.027-.611.123-.761.135-.136.302-.353.453-.529.151-.176.202-.302.302-.503.1-.202.05-.378-.025-.529-.076-.151-.68-1.638-.932-2.242-.245-.588-.495-.508-.68-.517-.176-.008-.378-.01-.58-.01-.202 0-.529.076-.806.378-.277.302-1.058 1.033-1.058 2.52 0 1.487 1.083 2.924 1.234 3.125.151.202 2.128 3.25 5.155 4.552 2.158.932 2.898.813 3.427.737.59-.084 1.786-.73 2.038-1.436.252-.705.252-1.31.176-1.436-.076-.126-.277-.202-.58-.353z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" title="Instagram">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" title="LinkedIn">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" title="YouTube">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path
+                                d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social-link" title="Twitter">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Cameras</h4>
+                <ul>
+                    <li><a href="#">DSLR Cameras</a></li>
+                    <li><a href="#">Mirrorless</a></li>
+                    <li><a href="#">Cinema Cameras</a></li>
+                    <li><a href="#">Action Cameras</a></li>
+                    <li><a href="#">Drones</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Accessories</h4>
+                <ul>
+                    <li><a href="#">Lenses</a></li>
+                    <li><a href="#">Tripods</a></li>
+                    <li><a href="#">Gimbals</a></li>
+                    <li><a href="#">Filters</a></li>
+                    <li><a href="#">Lighting</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 LensRoyale. All rights reserved.</p>
+            <p>Made with ❤️ for photographers</p>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop">⬆</button>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
